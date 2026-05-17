@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Anbar.Views.Settings.Sections.PaymentSettingsSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Ödəniş Ayarları"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Foreground="#0F172A"/>
+
+            <TextBlock Text="Supplier borcu, qismən ödəniş və qaimə ödəniş davranışları."
+                       Foreground="#64748B"
+                       Margin="0,4,0,18"/>
+
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="1. Hazırkı mövcud məntiq"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#1E3A8A"
+                               Margin="0,0,0,16"/>
+
+                    <CheckBox x:Name="AutoSupplierDebtCheck"
+                              Content="Giriş qaiməsi təsdiqində supplier borcu avtomatik hesablansın"
+                              FontWeight="SemiBold"
+                              IsChecked="True"
+                              Margin="0,8,0,12"/>
+
+                    <CheckBox x:Name="AllowPartialPaymentCheck"
+                              Content="Qismən ödəniş aktiv olsun"
+                              FontWeight="SemiBold"
+                              IsChecked="True"
+                              Margin="0,8,0,12"/>
+
+                    <CheckBox x:Name="AllowOverPaymentCheck"
+                              Content="Artıq ödənişə icazə verilsin"
+                              FontWeight="SemiBold"
+                              IsChecked="True"
+                              Margin="0,8,0,12"/>
+
+                    <Border Background="#FFFBEB"
+                            BorderBrush="#FDE68A"
+                            BorderThickness="1"
+                            CornerRadius="12"
+                            Padding="14"
+                            Margin="0,12,0,0">
+                        <TextBlock TextWrapping="Wrap"
+                                   Foreground="#92400E"
+                                   FontWeight="SemiBold"
+                                   Text="Bu section hələ placeholder-dır. Səndə PaymentSetting entity yoxdur. Hazırda qaimə ödəniş məntiqi InvoicePayment, SupplierPayment və SupplierBalanceTransaction üzərindən işləyəcək."/>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

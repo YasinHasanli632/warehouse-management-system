@@ -1,0 +1,53 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Publish
+publish/
+
+# Database
+*.mdf
+*.ldf
+
+# Environment files
+.env
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Test results
+TestResults/
+
+# Azure
+*.azurePubxml
+
+# Backup files
+*.bak
+
+# SQLite
+*.db

@@ -1,0 +1,208 @@
+﻿<UserControl x:Class="Anbar.Views.Settings.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#F5F7FB">
+
+    <UserControl.Resources>
+
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="Background" Value="#2563EB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#2563EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="Background" Value="#F8FAFC"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="BorderBrush" Value="#CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Margin="22">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Border Grid.Row="0"
+                Background="White"
+                CornerRadius="14"
+                Padding="18"
+                BorderBrush="#E5E7EB"
+                BorderThickness="1"
+                Margin="0,0,0,16">
+
+            <Grid>
+                <StackPanel>
+                    <TextBlock Text="Ayarlar"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="#0F172A"/>
+
+                    <TextBlock Text="Sistem parametrləri, qaimə, stok, FIFO, maya, vergi, yerli alış və idxal davranışlarını idarə edin."
+                               Foreground="#64748B"
+                               Margin="0,5,0,0"/>
+
+                    <TextBlock x:Name="MessageText"
+                               Text="Ayarlar yüklənir..."
+                               Foreground="#64748B"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top">
+
+                    <Button Content="Default ayarları bərpa et"
+                            Width="190"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Margin="0,0,10,0"
+                            Click="ResetDefaults_Click"/>
+
+                    <Button Content="Ayarları saxla"
+                            Width="145"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Click="SaveAll_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- BODY -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT MENU -->
+            <Border Grid.Column="0"
+                    Background="White"
+                    CornerRadius="14"
+                    Padding="14"
+                    BorderBrush="#E5E7EB"
+                    BorderThickness="1">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+
+                        <TextBlock Text="SETTINGS"
+                                   Foreground="#64748B"
+                                   FontSize="12"
+                                   FontWeight="Bold"
+                                   Margin="8,4,0,12"/>
+
+                        <Button x:Name="GeneralBtn"
+                                Content="Ümumi ayarlar"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="General_Click"/>
+
+                        <Button x:Name="InvoiceBtn"
+                                Content="Qaimə ayarları"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Invoice_Click"/>
+
+                        <Button x:Name="StockBtn"
+                                Content="Stok ayarları"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Stock_Click"/>
+
+                        <Button x:Name="CostBtn"
+                                Content="Maya dəyəri ayarları"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Cost_Click"/>
+
+                        <Button x:Name="LocalBtn"
+                                Content="Yerli alış və xərclər"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Local_Click"/>
+
+                        <Button x:Name="ImportBtn"
+                                Content="İdxal və maya dəyəri"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Import_Click"/>
+
+                        <Button x:Name="TaxBtn"
+                                Content="Vergi ayarları"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Tax_Click"/>
+
+                        <Button x:Name="NumberingBtn"
+                                Content="Nömrələmə"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Numbering_Click"/>
+
+                        <Button x:Name="PaymentBtn"
+                                Content="Ödəniş ayarları"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Payment_Click"/>
+
+                        <Button x:Name="DocumentBtn"
+                                Content="Sənəd ayarları"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Document_Click"/>
+
+                        <Button x:Name="PermissionBtn"
+                                Content="İcazələr və təhlükəsizlik"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="Permission_Click"/>
+
+                        <Button x:Name="SystemBtn"
+                                Content="Sistem ayarları"
+                                Style="{StaticResource NavButtonStyle}"
+                                Click="System_Click"/>
+
+                        <Border Background="#EFF6FF"
+                                BorderBrush="#BFDBFE"
+                                BorderThickness="1"
+                                CornerRadius="12"
+                                Padding="12"
+                                Margin="0,12,0,0">
+
+                            <TextBlock TextWrapping="Wrap"
+                                       Foreground="#1E40AF"
+                                       FontWeight="SemiBold"
+                                       Text="Bu bölmə sistemin real biznes davranışlarını idarə edir. Dəyişikliklər qaimə, stok, FIFO, maya və vergi servislərinə tətbiq olunacaq."/>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- RIGHT CONTENT -->
+            <Border Grid.Column="2"
+                    Background="#F8FAFC"
+                    CornerRadius="14"
+                    BorderBrush="#E5E7EB"
+                    BorderThickness="1"
+                    Padding="16">
+
+                <ContentControl x:Name="SettingsContent"/>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

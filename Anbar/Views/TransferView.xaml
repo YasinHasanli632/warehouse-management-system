@@ -1,0 +1,504 @@
+﻿<UserControl x:Class="Anbar.Views.TransferView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#F4F7FB">
+
+    <UserControl.Resources>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="16"/>
+        </Style>
+
+        <Style x:Key="MiniCard" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14"/>
+        </Style>
+
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#334155"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="Combo" TargetType="ComboBox">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Padding" Value="9,0"/>
+            <Setter Property="BorderBrush" Value="#D6DEE9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="Input" TargetType="TextBox">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#D6DEE9"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="FontSize" Value="12.5"/>
+        </Style>
+
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Background" Value="#2563EB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="SoftButton" TargetType="Button">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Background" Value="#EFF6FF"/>
+            <Setter Property="Foreground" Value="#1E40AF"/>
+            <Setter Property="BorderBrush" Value="#BFDBFE"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="MapShelfButton" TargetType="Button">
+            <Setter Property="Width" Value="92"/>
+            <Setter Property="Height" Value="58"/>
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+            <Setter Property="RowHeight" Value="36"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F8FAFC"/>
+            <Setter Property="Foreground" Value="#334155"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="Padding" Value="8,0"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="22">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="14"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource Card}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="14"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Width="52" Height="52" CornerRadius="13" Background="#2563EB">
+                    <TextBlock Text="↔" Foreground="White" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <TextBlock Text="Rəfdən-rəfə Transfer" FontSize="23" FontWeight="Bold" Foreground="#0F172A"/>
+                    <TextBlock Text="Məhsulun olduğu rəflərdən çıxış rəfini seçin, sonra hədəf rəfi seçib transfer edin." Foreground="#64748B" FontSize="12.5" Margin="0,5,0,0"/>
+                </StackPanel>
+
+                <Button Grid.Column="3" Content="⟳  Yenilə" Style="{StaticResource SoftButton}" Width="92" Click="Refresh_Click"/>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="14"/>
+                <ColumnDefinition Width="360"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Style="{StaticResource MiniCard}" Background="#F8FAFF" BorderBrush="#DBEAFE">
+                            <StackPanel>
+                                <TextBlock Text="Seçilmiş məhsul" Foreground="#64748B" FontSize="12"/>
+                                <TextBlock x:Name="SelectedProductText" Text="-" FontSize="18" FontWeight="Bold" Foreground="#0F172A" Margin="0,4,0,0"/>
+                                <TextBlock x:Name="SelectedProductSubText" Text="" Foreground="#64748B" FontSize="11"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Style="{StaticResource MiniCard}" Background="#FFF7F7" BorderBrush="#FECACA">
+                            <StackPanel>
+                                <TextBlock Text="Çıxış rəfində stok" Foreground="#64748B" FontSize="12"/>
+                                <TextBlock x:Name="FromStockText" Text="0" FontSize="18" FontWeight="Bold" Foreground="#DC2626" Margin="0,4,0,0"/>
+                                <TextBlock x:Name="FromShelfSubText" Text="" Foreground="#64748B" FontSize="11"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="4" Style="{StaticResource MiniCard}" Background="#FFFBEB" BorderBrush="#FDE68A">
+                            <StackPanel>
+                                <TextBlock Text="Giriş rəfi doluluğu" Foreground="#64748B" FontSize="12"/>
+                                <TextBlock x:Name="ToShelfStatusText" Text="-" FontSize="18" FontWeight="Bold" Foreground="#D97706" Margin="0,4,0,0"/>
+                                <TextBlock x:Name="ToShelfSubText" Text="" Foreground="#64748B" FontSize="11"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="6" Style="{StaticResource MiniCard}" Background="#F0FDF4" BorderBrush="#BBF7D0">
+                            <StackPanel>
+                                <TextBlock Text="Məhsulun ümumi stoku" Foreground="#64748B" FontSize="12"/>
+                                <TextBlock x:Name="TotalProductStockText" Text="0" FontSize="18" FontWeight="Bold" Foreground="#15803D" Margin="0,4,0,0"/>
+                                <TextBlock Text="seçilmiş məhsul" Foreground="#64748B" FontSize="11"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="12"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel>
+                                <TextBlock Text="Məhsulun olduğu rəflər" FontSize="19" FontWeight="Bold" Foreground="#0F172A"/>
+                                <TextBlock Text="Məhsul seçildikdən sonra yalnız həmin məhsulun olduğu rəflər göstərilir. 1-ci klik çıxış, 2-ci klik giriş rəfi seçir." Foreground="#64748B" FontSize="12" Margin="0,4,0,0"/>
+                            </StackPanel>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel>
+                                    <TextBlock Text="1  Çıxış rəfini seçin" Foreground="#1D4ED8" FontWeight="Bold" FontSize="12" Margin="0,0,0,6"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox x:Name="FromZoneCombo" Style="{StaticResource Combo}" SelectionChanged="FromZoneCombo_SelectionChanged"/>
+                                        <ComboBox x:Name="FromRowCombo" Grid.Column="2" Style="{StaticResource Combo}" SelectionChanged="FromRowCombo_SelectionChanged"/>
+                                        <ComboBox x:Name="FromShelfCombo" Grid.Column="4" Style="{StaticResource Combo}" DisplayMemberPath="Code" SelectedValuePath="Id" SelectionChanged="FromShelfCombo_SelectionChanged"/>
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="2  Giriş rəfini seçin" Foreground="#1D4ED8" FontWeight="Bold" FontSize="12" Margin="0,0,0,6"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox x:Name="ToZoneCombo" Style="{StaticResource Combo}" SelectionChanged="ToZoneCombo_SelectionChanged"/>
+                                        <ComboBox x:Name="ToRowCombo" Grid.Column="2" Style="{StaticResource Combo}" SelectionChanged="ToRowCombo_SelectionChanged"/>
+                                        <ComboBox x:Name="ToShelfCombo" Grid.Column="4" Style="{StaticResource Combo}" DisplayMemberPath="Code" SelectedValuePath="Id" SelectionChanged="ToShelfCombo_SelectionChanged"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+
+                            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                                <TextBlock Text="Doluluq səviyyələri:" Foreground="#334155" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                <Border Background="#ECFDF5" CornerRadius="7" Padding="9,5" Margin="12,0,0,0">
+                                    <TextBlock Text="0-30% Boş" Foreground="#15803D" FontSize="12"/>
+                                </Border>
+                                <Border Background="#FFFBEB" CornerRadius="7" Padding="9,5" Margin="8,0,0,0">
+                                    <TextBlock Text="30-70% Orta" Foreground="#B45309" FontSize="12"/>
+                                </Border>
+                                <Border Background="#FEF2F2" CornerRadius="7" Padding="9,5" Margin="8,0,0,0">
+                                    <TextBlock Text="70-100% Doludur" Foreground="#DC2626" FontSize="12"/>
+                                </Border>
+                            </StackPanel>
+
+                            <Border Grid.Row="6" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="12" Padding="12" Background="#F8FAFC">
+                                <Grid>
+                                    <TextBlock x:Name="ProductMapEmptyText"
+                                               Text="Məhsul seçin — həmin məhsulun olduğu rəflər burada kart kimi görünəcək."
+                                               Foreground="#64748B"
+                                               FontWeight="SemiBold"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                    <ItemsControl x:Name="ProductShelfMapItems">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="54"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Border Background="#1D4ED8" CornerRadius="8" Padding="8" Margin="0,0,10,0">
+                                                        <StackPanel VerticalAlignment="Center">
+                                                            <TextBlock Text="{Binding Zone}" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                                            <TextBlock Text="Zona" Foreground="#DBEAFE" FontSize="10" HorizontalAlignment="Center"/>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding Shelves}">
+                                                        <ItemsControl.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <WrapPanel/>
+                                                            </ItemsPanelTemplate>
+                                                        </ItemsControl.ItemsPanel>
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Button Style="{StaticResource MapShelfButton}"
+                                                                        Tag="{Binding ShelfId}"
+                                                                        Click="ProductShelfCard_Click"
+                                                                        Background="{Binding CardBackground}"
+                                                                        BorderBrush="{Binding CardBorder}"
+                                                                        Foreground="{Binding CardForeground}">
+                                                                    <Grid>
+                                                                        <StackPanel VerticalAlignment="Center">
+                                                                            <TextBlock Text="{Binding ShelfCode}" FontWeight="Bold" FontSize="13" HorizontalAlignment="Center"/>
+                                                                            <TextBlock Text="{Binding ProductQuantityText}" FontSize="11" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                            <TextBlock Text="{Binding OccupancyText}" FontSize="10" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Button>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </Border>
+
+                            <Button x:Name="ShowMoreProductShelvesButton"
+                                    Grid.Row="7"
+                                    Content="+  5 rəf daha göstər"
+                                    Style="{StaticResource SoftButton}"
+                                    Width="155"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,10,0,0"
+                                    Visibility="Collapsed"
+                                    Click="ShowMoreProductShelves_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="155"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Rəflər üzrə mövcud qalıqlar" FontSize="18" FontWeight="Bold" Foreground="#0F172A"/>
+
+                            <DataGrid x:Name="StockGrid" Grid.Row="2" SelectionMode="Single" SelectionUnit="FullRow">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Rəf" Binding="{Binding ShelfCode}" Width="95"/>
+                                    <DataGridTextColumn Header="Zona" Binding="{Binding Zone}" Width="90"/>
+                                    <DataGridTextColumn Header="Sıra" Binding="{Binding RowNumber}" Width="70"/>
+                                    <DataGridTextColumn Header="Miqdar" Binding="{Binding QuantityText}" Width="105"/>
+                                    <DataGridTextColumn Header="Ölçü" Binding="{Binding Unit}" Width="80"/>
+                                    <DataGridTemplateColumn Header="Doluluq" Width="130">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid VerticalAlignment="Center">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="42"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Height="8" CornerRadius="4" Background="#E5E7EB" VerticalAlignment="Center">
+                                                        <Border Height="8" CornerRadius="4" HorizontalAlignment="Left" Width="{Binding OccupancyBarWidth}" Background="{Binding OccupancyBrush}"/>
+                                                    </Border>
+                                                    <TextBlock Grid.Column="1" Text="{Binding OccupancyText}" Foreground="{Binding OccupancyBrush}" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Son hərəkət" Binding="{Binding LastMovementDateText}" Width="140"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Grid Grid.Row="3" Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Background="#F8FAFC" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="10" Padding="12">
+                                    <StackPanel>
+                                        <TextBlock Text="Ümumi rəf sayı" Foreground="#64748B"/>
+                                        <TextBlock x:Name="TotalShelvesText" Text="0" FontSize="18" FontWeight="Bold" Foreground="#0F172A"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="1" Background="#ECFDF5" BorderBrush="#BBF7D0" BorderThickness="1" CornerRadius="10" Padding="12" Margin="8,0,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="Boş / az dolu" Foreground="#15803D"/>
+                                        <TextBlock x:Name="LowShelvesText" Text="0" FontSize="18" FontWeight="Bold" Foreground="#15803D"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="2" Background="#FFFBEB" BorderBrush="#FDE68A" BorderThickness="1" CornerRadius="10" Padding="12" Margin="8,0,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="Orta dolu" Foreground="#B45309"/>
+                                        <TextBlock x:Name="MediumShelvesText" Text="0" FontSize="18" FontWeight="Bold" Foreground="#B45309"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="3" Background="#FEF2F2" BorderBrush="#FECACA" BorderThickness="1" CornerRadius="10" Padding="12" Margin="8,0,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="Doludur" Foreground="#DC2626"/>
+                                        <TextBlock x:Name="HighShelvesText" Text="0" FontSize="18" FontWeight="Bold" Foreground="#DC2626"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <Border Grid.Column="2" Style="{StaticResource Card}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Transfer məlumatları" Style="{StaticResource SectionTitle}" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Məhsul" Style="{StaticResource Label}"/>
+                        <ComboBox x:Name="ProductCombo" Style="{StaticResource Combo}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectionChanged="ProductCombo_SelectionChanged" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="1  Çıxış rəfi (məhsulun olduğu rəf)" Foreground="#1D4ED8" FontWeight="Bold" FontSize="12" Margin="0,0,0,8"/>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="FromZoneMirror" Style="{StaticResource Combo}" IsHitTestVisible="False"/>
+                            <ComboBox x:Name="FromRowMirror" Grid.Column="2" Style="{StaticResource Combo}" IsHitTestVisible="False"/>
+                            <ComboBox x:Name="FromShelfMirror" Grid.Column="4" Style="{StaticResource Combo}" IsHitTestVisible="False"/>
+                        </Grid>
+                        <Border Background="#F8FAFC" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Stok miqdarı" Foreground="#64748B" FontSize="11"/>
+                                    <TextBlock x:Name="FromSmallStockText" Text="0" Foreground="#15803D" FontWeight="Bold" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Doluluq" Foreground="#64748B" FontSize="11"/>
+                                    <TextBlock x:Name="FromOccupancySmallText" Text="-" Foreground="#334155" FontWeight="Bold" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <TextBlock Text="2  Giriş rəfi (məhsulun köçürüləcəyi rəf)" Foreground="#1D4ED8" FontWeight="Bold" FontSize="12" Margin="0,0,0,8"/>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="ToZoneMirror" Style="{StaticResource Combo}" IsHitTestVisible="False"/>
+                            <ComboBox x:Name="ToRowMirror" Grid.Column="2" Style="{StaticResource Combo}" IsHitTestVisible="False"/>
+                            <ComboBox x:Name="ToShelfMirror" Grid.Column="4" Style="{StaticResource Combo}" IsHitTestVisible="False"/>
+                        </Grid>
+                        <Border Background="#F8FAFC" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="8" Padding="10" Margin="0,0,0,14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="Cari miqdar" Foreground="#64748B" FontSize="11"/>
+                                    <TextBlock x:Name="ToCurrentQtyText" Text="0" Foreground="#334155" FontWeight="Bold" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Doluluq" Foreground="#64748B" FontSize="11"/>
+                                    <TextBlock x:Name="ToSmallOccupancyText" Text="-" Foreground="#D97706" FontWeight="Bold" Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <TextBlock Text="Transfer miqdarı" Style="{StaticResource Label}"/>
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="65"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="QuantityText" Style="{StaticResource Input}" Text="1"/>
+                            <Border Grid.Column="1" Background="#F8FAFC" BorderBrush="#D6DEE9" BorderThickness="0,1,1,1">
+                                <TextBlock Text="ədəd" Foreground="#475569" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
+                            </Border>
+                        </Grid>
+                        <TextBlock x:Name="AvailableQtyText" Text="Mövcud miqdar: 0" Foreground="#64748B" FontSize="11" Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Qeyd" Style="{StaticResource Label}"/>
+                        <TextBox x:Name="NoteText" Height="64" Padding="10" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="#D6DEE9" BorderThickness="1" Background="White" Margin="0,0,0,14"/>
+
+                        <Button Content="↔  Transfer et" Style="{StaticResource PrimaryButton}" Click="Transfer_Click"/>
+                        <Button Content="Formanı təmizlə" Style="{StaticResource SoftButton}" Margin="0,9,0,0" Click="Clear_Click"/>
+
+                        <Border Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="10" Padding="11" Margin="0,14,0,0">
+                            <TextBlock x:Name="MessageText" Text="Məhsul seçin." Foreground="#64748B" TextWrapping="Wrap" FontSize="12"/>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

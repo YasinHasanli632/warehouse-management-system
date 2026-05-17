@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="Anbar.Views.OutputInvoicesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#F4F7FB">
+
+    <Grid Margin="26">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="White" CornerRadius="12" Padding="22" BorderBrush="#E5E7EB" BorderThickness="1">
+            <Grid>
+                <StackPanel>
+                    <TextBlock Text="Çıxış qaimələri"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="#0F172A"/>
+
+                    <TextBlock Text="Müştərilərə satılan malların çıxış qaimələri"
+                               Foreground="#64748B"
+                               FontSize="13"
+                               Margin="0,6,0,0"/>
+                </StackPanel>
+
+                <Button Content="Yenilə"
+                        Width="110"
+                        Height="36"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#EAF1FF"
+                        Foreground="#1E3A8A"
+                        BorderBrush="#BFDBFE"
+                        FontWeight="SemiBold"
+                        Click="Refresh_Click"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2"
+                Background="White"
+                CornerRadius="12"
+                Padding="18"
+                BorderBrush="#E5E7EB"
+                BorderThickness="1">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Başlanğıc" Foreground="#475569" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <DatePicker x:Name="FromDatePicker" Height="36"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Son tarix" Foreground="#475569" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <DatePicker x:Name="ToDatePicker" Height="36"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4">
+                    <TextBlock Text="Status" Foreground="#475569" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <ComboBox x:Name="StatusCombo" Height="36"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="6">
+                    <TextBlock Text="Axtarış" Foreground="#475569" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                    <TextBox x:Name="SearchText"
+                             Height="36"
+                             Padding="10,0"
+                             VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="8" Orientation="Horizontal" VerticalAlignment="Bottom">
+                    <Button Content="Axtar"
+                            Width="80"
+                            Height="36"
+                            Background="#2563EB"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontWeight="SemiBold"
+                            Click="Search_Click"/>
+
+                    <Button Content="Excel"
+                            Width="80"
+                            Height="36"
+                            Margin="8,0,0,0"
+                            Background="#16A34A"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontWeight="SemiBold"
+                            Click="Export_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="4"
+                Background="White"
+                CornerRadius="12"
+                Padding="18"
+                BorderBrush="#E5E7EB"
+                BorderThickness="1">
+
+            <DataGrid x:Name="InvoicesGrid"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      BorderThickness="0"
+                      RowHeight="38">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Qaimə №" Binding="{Binding InvoiceNumber}" Width="140"/>
+                    <DataGridTextColumn Header="Tarix" Binding="{Binding InvoiceDateText}" Width="145"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding StatusText}" Width="120"/>
+                    <DataGridTextColumn Header="Müştəri" Binding="{Binding PartyName}" Width="*"/>
+                    <DataGridTextColumn Header="Ümumi" Binding="{Binding TotalAmount, StringFormat={}{0:N2}}" Width="120"/>
+                    <DataGridTextColumn Header="Ödənilib" Binding="{Binding PaidAmount, StringFormat={}{0:N2}}" Width="120"/>
+                    <DataGridTextColumn Header="Borc" Binding="{Binding DebtAmount, StringFormat={}{0:N2}}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

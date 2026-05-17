@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Anbar.Views.Settings.Sections.SystemSettingsSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Sistem Ayarları"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Foreground="#0F172A"/>
+
+            <TextBlock Text="Cache, backup, sistem statusu və ümumi texniki parametrlər."
+                       Foreground="#64748B"
+                       Margin="0,4,0,18"/>
+
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="1. Sistem məlumatı"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#1E3A8A"
+                               Margin="0,0,0,16"/>
+
+                    <UniformGrid Columns="2">
+                        <TextBlock Text="Modul: Anbar ERP / WMS" Foreground="#334155" Margin="0,6"/>
+                        <TextBlock Text="Settings mode: Section based" Foreground="#334155" Margin="0,6"/>
+                        <TextBlock Text="Cache: SettingsService runtime cache" Foreground="#334155" Margin="0,6"/>
+                        <TextBlock Text="Status: Development" Foreground="#334155" Margin="0,6"/>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="2. Gələcək sistem əməliyyatları"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#1E3A8A"
+                               Margin="0,0,0,14"/>
+
+                    <CheckBox Content="Auto backup aktiv olsun" FontWeight="SemiBold" Margin="0,8,0,12"/>
+                    <CheckBox Content="Startup-da settings cache yüklənsin" FontWeight="SemiBold" IsChecked="True" Margin="0,8,0,12"/>
+                    <CheckBox Content="Sistem audit log aktiv olsun" FontWeight="SemiBold" Margin="0,8,0,12"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

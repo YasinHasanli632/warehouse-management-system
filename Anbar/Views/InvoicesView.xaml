@@ -1,0 +1,588 @@
+﻿<UserControl x:Class="Anbar.Views.InvoicesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgBrush}">
+
+    <UserControl.Resources>
+
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushSoft}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="16"/>
+        </Style>
+
+        <Style x:Key="MetricCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushSoft}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Padding" Value="16,0"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="SecondaryButtonStyleLocal" TargetType="Button">
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushSoft}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="IconButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Background" Value="#F8FAFC"/>
+            <Setter Property="Foreground" Value="#475569"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="14"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="Bütün Qaimələr"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource TextBrush}"/>
+
+                <TextBlock Text="Bütün növ qaimələrin siyahısı və idarə edilməsi"
+                           FontSize="13"
+                           Foreground="{StaticResource MutedTextBrush}"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+
+                <Button x:Name="NewInvoiceButton"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Click="NewInvoice_Click"
+                        Margin="0,0,10,0" Height="27">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="+"
+                                   FontSize="20"
+                                   Margin="0,-2,8,0"/>
+                        <TextBlock Text="Yeni qaimə"/>
+                        <TextBlock Text="⌄"
+                                   Margin="12,0,0,0"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ExcelButton"
+                        Style="{StaticResource SecondaryButtonStyleLocal}"
+                        Click="Excel_Click"
+                        Margin="0,0,10,0" Height="27">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE8A5;"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   Margin="0,0,8,0"/>
+                        <TextBlock Text="Excel"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="PrintButton"
+                        Style="{StaticResource SecondaryButtonStyleLocal}"
+                        Click="Print_Click"
+                        Margin="0,0,10,0" Height="27">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE749;"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   Margin="0,0,8,0"/>
+                        <TextBlock Text="Çap et"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ColumnsButton"
+                        Style="{StaticResource SecondaryButtonStyleLocal}"
+                        Click="Columns_Click" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="1.718"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0.57"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE8EC;"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   Margin="0,0,8,0"/>
+                        <TextBlock Text="Sütunlar"/>
+                        <TextBlock Text="⌄"
+                                   Margin="12,0,0,0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- KPI CARDS -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="1.05*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="1.05*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Style="{StaticResource MetricCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="38" Height="38" CornerRadius="10" Background="#DBEAFE">
+                        <TextBlock Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource AccentBrush}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="Bugünkü qaimələr" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" FontSize="12"/>
+                        <TextBlock x:Name="TodayInvoicesCountText" Text="0" FontSize="22" FontWeight="Bold"/>
+                        <TextBlock x:Name="TodayInvoicesSubText" Text="+0 bu gün" Foreground="#475569" FontSize="11"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource MetricCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="38" Height="38" CornerRadius="10" Background="#FEF3C7">
+                        <TextBlock Text="&#xE8A5;" FontFamily="Segoe MDL2 Assets" Foreground="#D97706" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="Draft qaimələr" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" FontSize="12"/>
+                        <TextBlock x:Name="DraftInvoicesCountText" Text="0" FontSize="22" FontWeight="Bold"/>
+                        <TextBlock x:Name="DraftInvoicesSubText" Text="+0 yeni" Foreground="#475569" FontSize="11"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="4" Style="{StaticResource MetricCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="38" Height="38" CornerRadius="10" Background="#DCFCE7">
+                        <TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource SuccessBrush}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="Təsdiqlənmiş qaimələr" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" FontSize="12"/>
+                        <TextBlock x:Name="ConfirmedInvoicesCountText" Text="0" FontSize="22" FontWeight="Bold"/>
+                        <TextBlock x:Name="ConfirmedInvoicesSubText" Text="+0 bu həftə" Foreground="#475569" FontSize="11"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="6" Style="{StaticResource MetricCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="38" Height="38" CornerRadius="10" Background="#F3E8FF">
+                        <TextBlock Text="&#xE8AB;" FontFamily="Segoe MDL2 Assets" Foreground="#9333EA" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="İdxal qaimələri" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" FontSize="12"/>
+                        <TextBlock x:Name="ImportInvoicesCountText" Text="0" FontSize="22" FontWeight="Bold"/>
+                        <TextBlock Text="Bu ay" Foreground="#475569" FontSize="11"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="8" Style="{StaticResource MetricCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="38" Height="38" CornerRadius="10" Background="#FEE2E2">
+                        <TextBlock Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource DangerBrush}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="Geri qaytarma qaimələri" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" FontSize="12"/>
+                        <TextBlock x:Name="ReturnInvoicesCountText" Text="0" FontSize="22" FontWeight="Bold"/>
+                        <TextBlock Text="Bu ay" Foreground="#475569" FontSize="11"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Style="{StaticResource MetricCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Ümumi məbləğ" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" FontSize="12"/>
+                    <TextBlock x:Name="TotalInvoiceAmountText" Text="0.00 ₼" FontSize="21" FontWeight="Bold"/>
+                    <TextBlock Text="Bu ay" Foreground="#475569" FontSize="11"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="12" Style="{StaticResource MetricCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Ümumi borc" Foreground="{StaticResource MutedTextBrush}" FontWeight="SemiBold" FontSize="12"/>
+                    <TextBlock x:Name="TotalDebtAmountText" Text="0.00 ₼" FontSize="21" FontWeight="Bold" Foreground="{StaticResource DangerBrush}"/>
+                    <TextBlock Text="Bu ay" Foreground="#475569" FontSize="11"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- FILTER PANEL -->
+        <Border Grid.Row="4" Style="{StaticResource CardStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.2*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="1.55*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Text="Axtarış" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="SearchTextBox" Height="27" Padding="10,0" VerticalContentAlignment="Center" TextChanged="SearchTextBox_TextChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Tip" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="InvoiceTypeCombo" Height="27" SelectionChanged="InvoiceTypeCombo_SelectionChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4">
+                    <TextBlock Text="Status" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="InvoiceStatusCombo" Height="27" SelectionChanged="InvoiceStatusCombo_SelectionChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="6">
+                    <TextBlock Text="Ödəniş statusu" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="PaymentStatusCombo" Height="26" SelectionChanged="PaymentStatusCombo_SelectionChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="8">
+                    <TextBlock Text="Tarix aralığı" Style="{StaticResource LabelStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker x:Name="DateFromPicker" Height="38" SelectedDateChanged="DateFilter_Changed" Grid.ColumnSpan="2" Margin="0,0,8,0"/>
+                        <DatePicker x:Name="DateToPicker" Grid.Column="2" Height="38" SelectedDateChanged="DateFilter_Changed"/>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Column="10">
+                    <TextBlock Text="Anbar" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="WarehouseCombo" Height="27" SelectionChanged="WarehouseCombo_SelectionChanged"/>
+                </StackPanel>
+
+                <Button Grid.Column="12" x:Name="MoreFilterButton" Style="{StaticResource SecondaryButtonStyleLocal}" VerticalAlignment="Bottom" Click="MoreFilter_Click" Content="Daha çox filter"/>
+                <Button Grid.Column="14" x:Name="ApplyFilterButton" Style="{StaticResource PrimaryButtonStyle}" VerticalAlignment="Bottom" Click="ApplyFilter_Click" Content="Filtrlə"/>
+            </Grid>
+        </Border>
+
+        <!-- TABLE -->
+        <Border Grid.Row="6" Style="{StaticResource CardStyle}" Padding="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1010*"/>
+                    <ColumnDefinition Width="203*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="62"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer Grid.Row="0"
+              HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Disabled">
+
+                    <DataGrid x:Name="InvoicesGrid"
+              MinWidth="1550"
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              IsReadOnly="True"
+              HeadersVisibility="Column"
+              GridLinesVisibility="Horizontal"
+              Background="White"
+              BorderThickness="0"
+              RowHeight="48"
+              ColumnHeaderHeight="44"
+              SelectionMode="Single"
+              SelectionChanged="InvoicesGrid_SelectionChanged"
+              MouseDoubleClick="InvoicesGrid_MouseDoubleClick">
+
+                        <DataGrid.Columns>
+
+                            <DataGridTemplateColumn Header="" Width="44">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Width="26"
+                                Height="26"
+                                CornerRadius="7"
+                                Background="{Binding TypeBadgeBackground}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TypeIcon}"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Foreground="{Binding TypeBadgeForeground}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="№"
+                                Binding="{Binding InvoiceNumber}"
+                                Width="150"/>
+
+                            <DataGridTextColumn Header="Tarix"
+                                Binding="{Binding InvoiceDateText}"
+                                Width="120"/>
+
+                            <DataGridTemplateColumn Header="Tip" Width="95">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding TypeBadgeBackground}"
+                                CornerRadius="6"
+                                Padding="8,3"
+                                HorizontalAlignment="Left">
+                                            <TextBlock Text="{Binding TypeText}"
+                                       Foreground="{Binding TypeBadgeForeground}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Mənbə" Width="85">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#F8FAFC"
+                                BorderBrush="#E5E7EB"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="8,3"
+                                HorizontalAlignment="Left">
+                                            <TextBlock Text="{Binding SourceText}"
+                                       Foreground="#1E3A8A"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Tərəf"
+                                Binding="{Binding PartyName}"
+                                Width="180"/>
+
+                            <DataGridTextColumn Header="Anbar"
+                                Binding="{Binding WarehouseName}"
+                                Width="130"/>
+
+                            <DataGridTextColumn Header="Valyuta"
+                                Binding="{Binding CurrencyText}"
+                                Width="75"/>
+
+                            <DataGridTextColumn Header="Məzənnə"
+                                Binding="{Binding ExchangeRateText}"
+                                Width="85"/>
+
+                            <DataGridTemplateColumn Header="Status" Width="125">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{Binding StatusBadgeBackground}"
+                                CornerRadius="6"
+                                Padding="8,3"
+                                HorizontalAlignment="Left">
+                                            <TextBlock Text="{Binding StatusText}"
+                                       Foreground="{Binding StatusBadgeForeground}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Ödəniş statusu"
+                                Binding="{Binding PaymentStatusText}"
+                                Width="130"/>
+
+                            <DataGridTextColumn Header="Məbləğ (₼)"
+                                Binding="{Binding TotalAmountText}"
+                                Width="110"/>
+
+                            <DataGridTextColumn Header="Ödənilib (₼)"
+                                Binding="{Binding PaidAmountText}"
+                                Width="115"/>
+
+                            <DataGridTemplateColumn Header="Qalıq (₼)" Width="105">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DebtAmountText}"
+                                   Foreground="{Binding DebtForeground}"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Right"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Item"
+                                Binding="{Binding ItemCount}"
+                                Width="60"/>
+
+                            <DataGridTextColumn Header="Maya statusu"
+                                Binding="{Binding CostStatusText}"
+                                Width="110"/>
+
+                            <DataGridTextColumn Header="Stok statusu"
+                                Binding="{Binding StockStatusText}"
+                                Width="110"/>
+
+                            <DataGridTemplateColumn Header="Əməliyyatlar" Width="160">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+
+                                            <Button Style="{StaticResource IconButtonStyle}"
+                                    ToolTip="Bax"
+                                    Tag="{Binding Id}"
+                                    Click="ViewInvoice_Click"
+                                    Margin="0,0,5,0">
+                                                <TextBlock Text="&#xE8F4;" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+
+                                            <Button Style="{StaticResource IconButtonStyle}"
+                                    ToolTip="Düzəliş"
+                                    Tag="{Binding Id}"
+                                    Click="EditInvoice_Click"
+                                    Margin="0,0,5,0">
+                                                <TextBlock Text="&#xE70F;" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+
+                                            <Button Style="{StaticResource IconButtonStyle}"
+                                    ToolTip="Çap"
+                                    Tag="{Binding Id}"
+                                    Click="PrintInvoice_Click"
+                                    Margin="0,0,5,0">
+                                                <TextBlock Text="&#xE749;" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+
+                                            <Button Style="{StaticResource IconButtonStyle}"
+                                    ToolTip="Daha çox"
+                                    Tag="{Binding Id}"
+                                    Click="MoreInvoiceActions_Click">
+                                                <TextBlock Text="&#xE712;" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+
+                <!-- FOOTER -->
+                <Border Grid.Row="1" Background="White" BorderBrush="{StaticResource BorderBrushSoft}" BorderThickness="0,1,0,0" Padding="14,0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="FooterTotalInvoicesText" Text="Ümumi qaimə: 0" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="2" x:Name="FooterTotalAmountText" Text="Ümumi məbləğ: 0.00 ₼" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="4" x:Name="FooterPaidAmountText" Text="Ödənilib: 0.00 ₼" VerticalAlignment="Center" Foreground="{StaticResource SuccessBrush}"/>
+                        <TextBlock Grid.Column="6" x:Name="FooterDebtAmountText" Text="Qalıq borc: 0.00 ₼" VerticalAlignment="Center" Foreground="{StaticResource DangerBrush}"/>
+                        <TextBlock Grid.Column="8" x:Name="FooterItemCountText" Text="Item sayı: 0" VerticalAlignment="Center"/>
+
+                        <StackPanel Grid.Column="10" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Səhifədə" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <ComboBox x:Name="PageSizeCombo" Width="80" Height="27" SelectionChanged="PageSizeCombo_SelectionChanged"/>
+                            <Button x:Name="PrevPageButton" Content="‹" Width="34" Height="27" Margin="12,0,6,0" Click="PrevPage_Click"/>
+                            <TextBlock x:Name="PageInfoText" Text="1" VerticalAlignment="Center" FontWeight="Bold" Margin="8,0"/>
+                            <Button x:Name="NextPageButton" Content="›" Width="34" Height="34" Margin="6,0,0,0" Click="NextPage_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
