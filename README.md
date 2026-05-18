@@ -1,3 +1,36 @@
+# Screenshots
+
+## Dashboard
+
+Warehouse analytics, stock monitoring, operational overview and financial statistics dashboard.
+
+![Dashboard](./dashboard.png)
+
+---
+
+## Invoice Detail
+
+Invoice workflow, stock movement tracking, FIFO operations and tax calculation management.
+
+![Invoice Detail](./invoice-detail.png)
+
+---
+
+## Product Management
+
+Product listing, filtering, export operations and inventory management interface.
+
+![Products Management](./products-management.png)
+
+---
+
+## ERP Settings
+
+ERP configuration panel including stock policies, valuation methods and system settings.
+
+![ERP Settings](./erp-settings.png)
+
+---
 # ANBAR ERP & Warehouse Management System
 
 ## Sistem Haqqında
